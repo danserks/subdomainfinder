@@ -28,4 +28,5 @@ domain = "test.com"
 sub_domain_list = load_sub_domain(sub_domain_path)
 found_sub_domains = find_sub_domains(domain, sub_domain_list)
 
+print("Twanst Codes")
 print(found_sub_domains)
