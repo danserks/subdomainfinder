@@ -23,10 +23,9 @@ def load_sub_domain(file_path):
         return [line.strip() for line in file.readlines()]
 
 sub_domain_path = "subdomain.txt"
-domain = "test.com"
+domain = input("Enter Domain/ Example.com: ")
 
 sub_domain_list = load_sub_domain(sub_domain_path)
 found_sub_domains = find_sub_domains(domain, sub_domain_list)
 
-print("Twanst Codes {Full Stack Developer}")
 print(found_sub_domains)
