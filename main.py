@@ -28,4 +28,8 @@ domain = input("Enter Domain/ Example.com: ")
 sub_domain_list = load_sub_domain(sub_domain_path)
 found_sub_domains = find_sub_domains(domain, sub_domain_list)
 
-print(found_sub_domains)
+if found_sub_domains:
+    print(found_sub_domains)
+else:
+    print("Not found sub domain")
+
