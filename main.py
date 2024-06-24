@@ -1,7 +1,7 @@
 import requests
 import pyfiglet
 import json
-from colorama import Fore, Style  # Import libraries for color output
+from colorama import Fore, Style, init  # Import libraries for color output
 
 def find_sub_domains(domain):
   found_sub_domains = []
@@ -44,25 +44,43 @@ def find_sub_domains(domain):
 
   return found_sub_domains
 
-def print_banner():
-  ascii_banner = pyfiglet.figlet_format("KURD", font="slant")
-  print(ascii_banner)
-  print("Create By Twanst Codes ")
-  print("Github:: https://github.com/TwanstCodess/subdomainfinder.git")
+def print_colored_banner(text, language):
+  colors = [Fore.RED, Fore.YELLOW, Fore.GREEN]  # Define color choices
+  if language == "Kurdish Sorani":
+    text = "دۆزرایەوە"  # Replace with Kurdish Sorani text for banner
+    message = "ئەمانەی کە دۆزراوەتەوە لە سەبدۆمەین"  # Kurdish message for discovered subdomains
+
+  # Combine colors for a gradient effect
+  color_gradient = "".join([color for color in colors])
+  ascii_banner = pyfiglet.figlet_format(text, font="slant")
+  print(color_gradient + ascii_banner + Style.RESET_ALL)  # Print banner with gradient
 
 if __name__ == "__main__":
-  print_banner()
+  init(autoreset=True)  # Initialize colorama for colored output
+
+  # Ask for language preference
+  language_options = {"English (default)": "English", "Kurdish Sorani": "Kurdish Sorani"}
+  default_language = "English"
+  while True:
+    print("Choose language:")
+    for option, code in language_options.items():
+      print(f"- {option}")
+    selected_language = input("Enter your choice (default: English): ")
+    if selected_language.lower() in language_options.keys() or not selected_language:
+      language = language_options.get(selected_language, default_language)
+      break
+    else:
+      print("Invalid selection. Please choose a valid language.")
+
+  # Print colored banner based on language
+  print_colored_banner("KURD", language)
   domain = input("Enter Domain (e.g., example.com): ")
   found_sub_domains = find_sub_domains(domain)
 
   if found_sub_domains:
-    print("\nDiscovered Subdomains:")
+    # Print Kurdish message for discovered subdomains only for Kurdish Sorani
+    if language == "Kurdish Sorani":
+      print(message)
+    print("\nDiscovered Subdomains:")  # Print in English for clarity
     with open("log.txt", "r") as logfile:  # Read and print subdomains from log
-      log_contents = logfile.read()
-      print(log_contents)
-  else:
-    print("No subdomains found.")
-
-  # Clear log file for next run (optional)
-  # with open("log.txt", "w") as logfile:
-  #   logfile.write("")
+      log_contents =
